@@ -1,7 +1,25 @@
 import React from "react";
-import { ArrowRight, Album, BuildRounded } from "@mui/icons-material";
 import { timestampToDate } from "./datetime-formatters";
 import "./hoplist.css";
+
+// Default SVG Icons
+const DefaultStartIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style={{ display: 'block' }}>
+    <path d="M10 17l5-5-5-5v10z" />
+  </svg>
+);
+
+const DefaultStepIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style={{ display: 'block' }}>
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+  </svg>
+);
+
+const DefaultEndIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style={{ display: 'block' }}>
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+  </svg>
+);
 
 export default function HopList({ 
   hopChunks,
@@ -9,9 +27,9 @@ export default function HopList({
   timelineColor = "#6B7280", 
   stepIconColor = "#6B7280",
   endIconColor = "#6B7280",
-  startIcon: StartIcon = ArrowRight,
-  endIcon: EndIcon = Album,
-  stepIcon: StepIcon = BuildRounded
+  startIcon: StartIcon = DefaultStartIcon,
+  endIcon: EndIcon = DefaultEndIcon,
+  stepIcon: StepIcon = DefaultStepIcon
 }) {
   const customStyles = {
     '--start-icon-color': startIconColor,
