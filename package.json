@@ -7,7 +7,7 @@
     "test": "echo \"No test specified\""
   },
   "bin": {
-    "hoplist": "./hoplist.js"
+    "hoplist": "hoplist.js"
   },
   "repository": {
     "type": "git",
