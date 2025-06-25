@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"No test specified\""
   },
+  "bin": {
+    "hoplist": "./hoplist.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/akashleo/hoplist.git"
