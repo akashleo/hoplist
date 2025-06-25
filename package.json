@@ -1,0 +1,27 @@
+{
+  "name": "hoplist",
+  "version": "1.0.0",
+  "description": "hoplist is a react horizontal timeline with minimal parameters",
+  "main": "hoplist.js",
+  "scripts": {
+    "test": "echo \"No test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akashleo/hoplist.git"
+  },
+  "keywords": [
+    "hoplist",
+    "horizontal-timeline",
+    "timeline",
+    "react",
+    "react-horizontal",
+    "react-timeline"
+  ],
+  "author": "Akash Ghosh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akashleo/hoplist/issues"
+  },
+  "homepage": "https://github.com/akashleo/hoplist#readme"
+}

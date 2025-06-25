@@ -1,163 +1,88 @@
-import React, { useState, useEffect } from "react";
-import {
-  ArrowRight,
-  EditOutlined,
-  Album,
-  BuildRounded,
-  PublishOutlined,
-  CloseOutlined,
-} from "@mui/icons-material";
-import { timestampToDate } from "../../util/datetime-formatters";
+#!/usr/bin/env node
+import React from "react";
+import { ArrowRight, Album, BuildRounded } from "@mui/icons-material";
+import { timestampToDate } from "./datetime-formatters";
+import "./hoplist.css";
 
-export default function HopList({ hopChunks }) {
+export default function HopList({ 
+  hopChunks,
+  startIconColor = "#6B7280",
+  timelineColor = "#6B7280", 
+  stepIconColor = "#6B7280",
+  endIconColor = "#6B7280",
+  startIcon: StartIcon = ArrowRight,
+  endIcon: EndIcon = Album,
+  stepIcon: StepIcon = BuildRounded
+}) {
+  const customStyles = {
+    '--start-icon-color': startIconColor,
+    '--timeline-color': timelineColor,
+    '--step-icon-color': stepIconColor,
+    '--end-icon-color': endIconColor
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      }}
-    >
+    <div className="hoplist-container" style={customStyles}>
       {hopChunks.map((item, index) => {
         return (
-          <>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
-            >
+          <React.Fragment key={index}>
+            <div className="hoplist-row">
               {index === 0 && (
-                <div
-                  style={{
-                    height: "2.5rem",
-                    width: "2.5rem",
-                    border: "5px solid #FF5733",
-                    borderRadius: "50%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <ArrowRight />
+                <div className="hoplist-start-icon">
+                  <StartIcon />
                 </div>
               )}
               {item.map(({ hopTime, name }, i) => (
-                <>
-                  <div style={{ display: "flex", flexDirection: "column" }}>
+                <React.Fragment key={i}>
+                  <div className="hoplist-item">
                     <div
-                      style={
+                      className={`hoplist-timeline-container ${
                         i === item.length - 1 && index < hopChunks.length - 1
-                          ? {
-                              display: "flex",
-                              flexDirection: "row",
-                              maxWidth: "17.5rem",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              padding: "0px !important",
-                              margin: "0px !important",
-                            }
-                          : {
-                              display: "flex",
-                              flexDirection: "row",
-                              maxWidth: "12.5rem",
-                              justifyContent: "flex-end",
-                              alignItems: "center",
-                              padding: "0px !important",
-                              margin: "0px !important",
-                            }
-                      }
+                          ? "hoplist-timeline-container--end"
+                          : "hoplist-timeline-container--default"
+                      }`}
                     >
-                      {index > 0 && i === 0 ? (
-                        <div
-                          style={{
-                            backgroundColor: "#FF5733",
-                            height: "0.25rem",
-                            width: "5rem",
-                          }}
-                        ></div>
-                      ) : (
-                        <div
-                          style={{
-                            backgroundColor: "#FF5733",
-                            height: "0.25rem",
-                            width: "10rem",
-                          }}
-                        ></div>
-                      )}
-                      {index === hopChunks.length - 1 &&
-                      i === item.length - 1 ? (
-                        <div
-                          style={{
-                            height: "2.5rem",
-                            width: "2.5rem",
-                            border: "5px solid lightgreen",
-                            borderRadius: "50%",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <Album />
-                        </div>
-                      ) : (
-                        <div
-                          style={{
-                            height: "2.5rem",
-                            width: "2.5rem",
-                            border: "3px solid #3f51b5",
-                            borderRadius: "50%",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <BuildRounded />
-                        </div>
-                      )}
-                      {i === item.length - 1 &&
-                        index < hopChunks.length - 1 && (
-                          <div
-                            style={{
-                              backgroundColor: "#FF5733",
-                              height: "0.25rem",
-                              width: "5rem",
-                            }}
-                          ></div>
+                      <div
+                        className={`hoplist-timeline-line ${
+                          index > 0 && i === 0
+                            ? "hoplist-timeline-line--short"
+                            : "hoplist-timeline-line--long"
+                        }`}
+                      ></div>
+                      
+                      <div
+                        className={`hoplist-icon ${
+                          index === hopChunks.length - 1 && i === item.length - 1
+                            ? "hoplist-icon--end"
+                            : "hoplist-icon--default"
+                        }`}
+                      >
+                        {index === hopChunks.length - 1 && i === item.length - 1 ? (
+                          <EndIcon />
+                        ) : (
+                          <StepIcon />
                         )}
+                      </div>
+                      
+                      {i === item.length - 1 && index < hopChunks.length - 1 && (
+                        <div className="hoplist-timeline-line hoplist-timeline-line--short"></div>
+                      )}
                     </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "end",
-                        maxWidth: "12.5rem",
-                        fontFamily: "monospace",
-                        height: "2rem",
-                      }}
-                    >
+                    
+                    <div className="hoplist-name">
                       <span>
-                        {" "}
                         <a>{name}</a>
                       </span>
                     </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "end",
-                        maxWidth: "12.5rem",
-                        fontFamily: "monospace",
-                        fontSize: "12px",
-                        height: "2rem",
-                      }}
-                    >
-                      <span> {timestampToDate(hopTime)}</span>
+                    
+                    <div className="hoplist-timestamp">
+                      <span>{timestampToDate(hopTime)}</span>
                     </div>
                   </div>
-                </>
+                </React.Fragment>
               ))}
             </div>
-          </>
+          </React.Fragment>
         );
       })}
     </div>
