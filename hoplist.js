@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import React from "react";
 import { ArrowRight, Album, BuildRounded } from "@mui/icons-material";
 import { timestampToDate } from "./datetime-formatters";
