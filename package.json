@@ -1,6 +1,6 @@
 {
   "name": "hoplist",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "hoplist is a react horizontal timeline with minimal parameters",
   "main": "hoplist.js",
   "scripts": {
