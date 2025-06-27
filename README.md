@@ -4,19 +4,13 @@ A beautiful and customizable React horizontal timeline component with minimal pa
 
 ## Features
 
-- 🎨 **Fully Customizable Colors** - Customize timeline, icons, and border colors
-- 🔧 **Custom Icons** - Replace default icons with your own Material-UI or custom icons
-- 📱 **Responsive Design** - Works seamlessly across different screen sizes
-- ⚡ **Lightweight** - Minimal dependencies and optimized performance
-- 🎯 **TypeScript Ready** - Built with TypeScript support in mind
+- 🎨 **Fully Customizable Colors** - Customize timeline and icon colors.
+- 🔧 **Custom Icons** - Replace default icons with your own React components or SVGs.
+- 📱 **Responsive & Scrollable** - A horizontally scrollable timeline that works on all screen sizes.
+- ⚡ **Lightweight** - Minimal dependencies and optimized performance.
+- 🎯 **TypeScript Ready** - Built with TypeScript support in mind.
 
 ## Installation
-
-```bash
-npx hoplist
-```
-
-Or if you want to install it locally in your project:
 
 ```bash
 npm install hoplist
@@ -31,21 +25,15 @@ import React from 'react';
 import HopList from 'hoplist';
 
 const MyComponent = () => {
-  const hopChunks = [
-    [
-      { hopTime: 1699123200, name: "Project Started" },
-      { hopTime: 1699209600, name: "Requirements Gathered" }
-    ],
-    [
-      { hopTime: 1699296000, name: "Development Phase" },
-      { hopTime: 1699382400, name: "Testing Phase" }
-    ],
-    [
-      { hopTime: 1699468800, name: "Project Completed" }
-    ]
+  const hops = [
+    { hopTime: 1699123200, name: "Project Started" },
+    { hopTime: 1699209600, name: "Requirements Gathered" },
+    { hopTime: 1699296000, name: "Development Phase" },
+    { hopTime: 1699382400, name: "Testing Phase" },
+    { hopTime: 1699468800, name: "Project Completed" }
   ];
 
-  return <HopList hopChunks={hopChunks} />;
+  return <HopList hops={hops} />;
 };
 
 export default MyComponent;
@@ -56,26 +44,20 @@ export default MyComponent;
 ```jsx
 import React from 'react';
 import HopList from 'hoplist';
-import { PlayArrow, CheckCircle, Settings } from '@mui/icons-material';
+import { PlayArrow, CheckCircle, Settings } from '@mui/icons-material'; // Example using Material-UI
 
 const MyComponent = () => {
-  const hopChunks = [
-    [
-      { hopTime: 1699123200, name: "Project Started" },
-      { hopTime: 1699209600, name: "Requirements Gathered" }
-    ],
-    [
-      { hopTime: 1699296000, name: "Development Phase" },
-      { hopTime: 1699382400, name: "Testing Phase" }
-    ],
-    [
-      { hopTime: 1699468800, name: "Project Completed" }
-    ]
+  const hops = [
+    { hopTime: "2023-11-04T12:00:00Z", name: "Project Started" },
+    { hopTime: "2023-11-05T12:00:00Z", name: "Requirements Gathered" },
+    { hopTime: "2023-11-06T12:00:00Z", name: "Development Phase" },
+    { hopTime: "2023-11-07T12:00:00Z", name: "Testing Phase" },
+    { hopTime: "2023-11-08T12:00:00Z", name: "Project Completed" }
   ];
 
   return (
     <HopList 
-      hopChunks={hopChunks}
+      hops={hops}
       startIconColor="#4CAF50"
       timelineColor="#2196F3"
       stepIconColor="#FF9800"
@@ -94,37 +76,32 @@ export default MyComponent;
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `hopChunks` | `Array<Array<{hopTime: number, name: string}>>` | **Required** | Array of arrays containing timeline data |
-| `startIconColor` | `string` | `"#FF5733"` | Color for the start icon border |
-| `timelineColor` | `string` | `"#FF5733"` | Color for the timeline lines |
-| `stepIconColor` | `string` | `"#3f51b5"` | Color for the step icon borders |
-| `endIconColor` | `string` | `"lightgreen"` | Color for the end icon border |
-| `startIcon` | `React.Component` | `ArrowRight` | Material-UI icon component for the start |
-| `endIcon` | `React.Component` | `Album` | Material-UI icon component for the end |
-| `stepIcon` | `React.Component` | `BuildRounded` | Material-UI icon component for steps |
+| `hops` | `Array<{hopTime: number | string, name: string}>` | **Required** | Array of objects containing timeline data. |
+| `startIconColor` | `string` | `"#6B7280"` | Color for the start icon border. |
+| `timelineColor` | `string` | `"#6B7280"` | Color for the timeline lines. |
+| `stepIconColor` | `string` | `"#6B7280"` | Color for the step icon borders. |
+| `endIconColor` | `string` | `"#6B7280"` | Color for the end icon border. |
+| `startIcon` | `React.Component` | `Default SVG` | React component for the start icon. |
+| `endIcon` | `React.Component` | `Default SVG` | React component for the end icon. |
+| `stepIcon` | `React.Component` | `Default SVG` | React component for intermediate step icons. |
 
 ## Data Structure
 
-### hopChunks Format
+### Hops Format
 
-The `hopChunks` prop expects an array of arrays, where each inner array represents a group of related timeline events:
+The `hops` prop expects a flat array of objects, where each object represents a single event on the timeline:
 
 ```javascript
-const hopChunks = [
-  // First group of events
-  [
-    { 
-      hopTime: 1699123200,  // Unix timestamp
-      name: "Event Name"    // Display name for the event
-    },
-    // ... more events in this group
-  ],
-  // Second group of events
-  [
-    { hopTime: 1699296000, name: "Another Event" },
-    // ... more events in this group
-  ],
-  // ... more groups
+const hops = [
+  { 
+    hopTime: 1699123200,      // Unix timestamp or ISO Date String
+    name: "Event Name"        // Display name for the event
+  },
+  { 
+    hopTime: "2023-11-05T12:00:00Z",
+    name: "Another Event"
+  },
+  // ... more events
 ];
 ```
 
@@ -132,40 +109,33 @@ const hopChunks = [
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `hopTime` | `number` | Unix timestamp (seconds since epoch) for the event |
-| `name` | `string` | Display name that will be shown below the timeline icon |
+| `hopTime` | `number \| string` | Unix timestamp (in seconds) or a date string parsable by `new Date()`. |
+| `name` | `string` | Display name that will be shown below the timeline icon. |
 
 ### Example with Real Data
 
 ```javascript
 const projectTimeline = [
-  [
-    { hopTime: 1699123200, name: "Kickoff Meeting" },
-    { hopTime: 1699209600, name: "Requirements Analysis" },
-    { hopTime: 1699296000, name: "Design Phase" }
-  ],
-  [
-    { hopTime: 1699382400, name: "Development Start" },
-    { hopTime: 1699468800, name: "Feature Complete" },
-    { hopTime: 1699555200, name: "Code Review" }
-  ],
-  [
-    { hopTime: 1699641600, name: "Testing" },
-    { hopTime: 1699728000, name: "Bug Fixes" },
-    { hopTime: 1699814400, name: "Production Deploy" }
-  ]
+  { hopTime: 1699123200, name: "Kickoff Meeting" },
+  { hopTime: 1699209600, name: "Requirements Analysis" },
+  { hopTime: 1699296000, name: "Design Phase" },
+  { hopTime: 1699382400, name: "Development Start" },
+  { hopTime: 1699468800, name: "Feature Complete" },
+  { hopTime: 1699555200, name: "Code Review" },
+  { hopTime: 1699641600, name: "Testing" },
+  { hopTime: 1699728000, name: "Bug Fixes" },
+  { hopTime: 1699814400, name: "Production Deploy" }
 ];
 ```
 
 ## Styling
 
-The component comes with default styling, but you can customize it further by:
+The component can be styled by:
 
 1. **Using the color props** (recommended):
    ```jsx
    <HopList 
-     hopChunks={data}
-     startIconColor="#your-color"
+     hops={data}
      timelineColor="#your-color"
      // ... other color props
    />
@@ -174,7 +144,7 @@ The component comes with default styling, but you can customize it further by:
 2. **Overriding CSS classes**:
    ```css
    .hoplist-container {
-     /* Your custom styles */
+     /* Your custom styles for the main container */
    }
    
    .hoplist-timeline-line {
@@ -184,26 +154,28 @@ The component comes with default styling, but you can customize it further by:
 
 ## CSS Classes Available for Customization
 
-- `.hoplist-container` - Main container
-- `.hoplist-row` - Each row of the timeline
-- `.hoplist-start-icon` - Starting icon container
-- `.hoplist-item` - Individual timeline item
-- `.hoplist-timeline-container` - Timeline line and icon container
-- `.hoplist-timeline-line` - Timeline connecting lines
-- `.hoplist-icon` - Icon containers
-- `.hoplist-name` - Event name text
-- `.hoplist-timestamp` - Timestamp text
+- `.hoplist-container` - The main container that centers the component.
+- `.hoplist-scroll-container` - The wrapper that handles horizontal scrolling.
+- `.hoplist-timeline` - The flex container for all timeline items.
+- `.hoplist-item` - An individual timeline item, including the icon and text.
+- `.hoplist-timeline-elements` - A wrapper for the icon and connecting line.
+- `.hoplist-timeline-line` - The connecting line between icons.
+- `.hoplist-icon` - General class for all icons.
+- `.hoplist-start-icon` - Specific class for the start icon.
+- `.hoplist-step-icon` - Specific class for the step icons.
+- `.hoplist-end-icon` - Specific class for the end icon.
+- `.hoplist-name` - The event name text.
+- `.hoplist-timestamp` - The timestamp text.
 
 ## Time Format
 
-The component automatically formats timestamps using the built-in `timestampToDate` function, which converts Unix timestamps to a readable format: `YYYY-MM-DD HH:MM:SS`.
+The component automatically formats the `hopTime` value using the built-in `timestampToDate` function, which produces a readable format: `YYYY-MM-DD HH:MM:SS`.
 
-If you need a different time format, you can modify the `datetime-formatters.js` file or create your own formatting function.
+If you need a different time format, you can modify the `datetime-formatters.js` file.
 
 ## Dependencies
 
 - React 16.8+ (for hooks support)
-- Material-UI Icons (for default icons)
 
 ## Browser Support
 
@@ -214,19 +186,15 @@ If you need a different time format, you can modify the `datetime-formatters.js`
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/amazing-feature`).
+3. Commit your changes (`git commit -m 'Add some amazing feature'`).
+4. Push to the branch (`git push origin feature/amazing-feature`).
+5. Open a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Examples
-
-Check out the `component-call.js` file for usage examples and implementation details.
+This project is licensed under the MIT License.
 
 ---
 

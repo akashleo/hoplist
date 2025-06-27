@@ -2,64 +2,49 @@
 
 .hoplist-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  --start-icon-color: #6B7280;
-  --timeline-color: #6B7280;
-  --step-icon-color: #6B7280;
-  --end-icon-color: #6B7280;
+  width: 100%;
+  --start-icon-color: #6b7280;
+  --timeline-color: #6b7280;
+  --step-icon-color: #6b7280;
+  --end-icon-color: #6b7280;
 }
 
-.hoplist-row {
+.hoplist-scroll-container {
+  width: 80%;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.hoplist-timeline {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-}
-
-.hoplist-start-icon {
-  height: 2.5rem;
-  width: 2.5rem;
-  border: 5px solid var(--start-icon-color);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .hoplist-item {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  position: relative;
 }
 
-.hoplist-timeline-container {
+.hoplist-timeline-elements {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  padding: 0px !important;
-  margin: 0px !important;
+  position: relative;
 }
 
-.hoplist-timeline-container--end {
-  max-width: 17.5rem;
-  justify-content: center;
-}
-
-.hoplist-timeline-container--default {
-  max-width: 12.5rem;
-  justify-content: flex-end;
+.hoplist-timeline-start {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .hoplist-timeline-line {
-  background-color: var(--timeline-color);
   height: 0.25rem;
-}
-
-.hoplist-timeline-line--short {
-  width: 5rem;
-}
-
-.hoplist-timeline-line--long {
-  width: 10rem;
+  width: 10rem; /* Fixed width for the line between items */
+  background-color: var(--timeline-color);
 }
 
 .hoplist-icon {
@@ -69,29 +54,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white; /* To appear above the timeline */
+  z-index: 1;
 }
 
-.hoplist-icon--end {
-  border: 5px solid var(--end-icon-color);
+.hoplist-start-icon {
+  border: 3px solid var(--start-icon-color);
 }
 
-.hoplist-icon--default {
+.hoplist-end-icon {
+  border: 3px solid var(--end-icon-color);
+}
+
+.hoplist-step-icon {
   border: 3px solid var(--step-icon-color);
 }
 
-.hoplist-name {
-  display: flex;
-  justify-content: end;
-  max-width: 12.5rem;
+.hoplist-name,
+.hoplist-timestamp {
+  padding-top: 0.5rem;
   font-family: monospace;
-  height: 2rem;
+  white-space: nowrap;
+  text-align: left;
 }
 
 .hoplist-timestamp {
-  display: flex;
-  justify-content: end;
-  max-width: 12.5rem;
-  font-family: monospace;
   font-size: 12px;
-  height: 2rem;
-} 
+}
