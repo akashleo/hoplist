@@ -2,6 +2,11 @@
 
 A beautiful and customizable React horizontal timeline component with minimal parameters. Perfect for displaying progress steps, journey milestones, or any sequential data.
 
+## Demo & Playground
+
+- 🌐 **Live Demo**: [hoplist.akashghosh.xyz](https://hoplist.akashghosh.xyz)
+- 🎮 **Playground**: [CodeSandbox](https://codesandbox.io/p/sandbox/mkr354)
+
 ## Features
 
 - 🎨 **Fully Customizable Colors** - Customize timeline and icon colors.
